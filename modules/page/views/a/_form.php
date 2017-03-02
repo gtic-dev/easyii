@@ -4,7 +4,7 @@ use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 use yii\easyii\widgets\Redactor;
 use yii\easyii\widgets\SeoForm;
-use kartik\markdown;
+use kartik\markdown\MarkdownEditor;
 
 
 ?>
@@ -13,10 +13,7 @@ use kartik\markdown;
     'options' => ['class' => 'model-form']
 ]); ?>
 <?= $form->field($model, 'title') ?>
-<?= $form->field($model, 'text')->widget(markdown\MarkdownEditor::widget([
-    'model' => $model,
-    'attribute' => 'markdown',
-])) ?>
+<?= $form->field($model, 'text')->widget(MarkdownEditor::className())?>
 <?php if(IS_ROOT) : ?>
     <?= $form->field($model, 'slug') ?>
     <?= SeoForm::widget(['model' => $model]) ?>
