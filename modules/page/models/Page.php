@@ -3,9 +3,15 @@ namespace yii\easyii\modules\page\models;
 
 use Yii;
 use yii\easyii\behaviors\SeoBehavior;
+use yii\helpers\Markdown;
 
 class Page extends \yii\easyii\components\ActiveRecord
 {
+    /**
+     * @var string
+     */
+    private $_html = null;
+
     public static function tableName()
     {
         return 'easyii_pages';
@@ -37,5 +43,13 @@ class Page extends \yii\easyii\components\ActiveRecord
         return [
             'seoBehavior' => SeoBehavior::className(),
         ];
+    }
+
+    public function getHtml()
+    {
+        if ($this->_html === null) {
+            $this->_html = Markdown::process($this->text);
+        }
+        return $this->_html;
     }
 }
