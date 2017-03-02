@@ -22,7 +22,7 @@ class PageObject extends \yii\easyii\components\ApiObject
         if($this->model->isNewRecord){
             return $this->createLink;
         } else {
-            return LIVE_EDIT ? API::liveEdit($this->model->text, $this->editLink, 'div') : $this->model->text;
+            return LIVE_EDIT ? API::liveEdit($this->model->html, $this->editLink, 'div') : $this->model->html;
         }
     }
 
