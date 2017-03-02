@@ -3,7 +3,7 @@ namespace yii\easyii\modules\page\models;
 
 use Yii;
 use yii\easyii\behaviors\SeoBehavior;
-use yii\helpers\Markdown;
+use kartik\markdown\Markdown;
 
 class Page extends \yii\easyii\components\ActiveRecord
 {
@@ -48,7 +48,9 @@ class Page extends \yii\easyii\components\ActiveRecord
     public function getHtml()
     {
         if ($this->_html === null) {
-            $this->_html = Markdown::process($this->text);
+            $this->_html = Markdown::convert($this->text, [
+                'custom' => ['<table>' => '<table class="table table-bordered table-striped">']
+            ]);
         }
         return $this->_html;
     }
